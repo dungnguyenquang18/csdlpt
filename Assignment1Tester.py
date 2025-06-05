@@ -1,7 +1,7 @@
 #
 # Tester for the assignement1
 #
-DATABASE_NAME = 'csdlpt'
+DATABASE_NAME = 'dds_assgn1'
 
 # TODO: Change these as per your code
 RATINGS_TABLE = 'ratings'
@@ -10,7 +10,7 @@ RROBIN_TABLE_PREFIX = 'rrobin_part'
 USER_ID_COLNAME = 'userid'
 MOVIE_ID_COLNAME = 'movieid'
 RATING_COLNAME = 'rating'
-INPUT_FILE_PATH = 'D:/3Y2S/csdlpt/ml-10M100K/ratings.dat'
+INPUT_FILE_PATH = 'D:/3Y2S/csdlpt/csdlpt/test_data.dat'
 ACTUAL_ROWS_IN_INPUT_FILE = 10000054  # Number of lines in the input file
 
 import psycopg2

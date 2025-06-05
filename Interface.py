@@ -82,10 +82,10 @@ def roundrobinpartition(ratingstablename, numberofpartitions, openconnection):
     cur = con.cursor()
     RROBIN_TABLE_PREFIX = 'rrobin_part'
     
-    # Xóa các bảng phân mảnh cũ
-    for i in range(numberofpartitions):
-        table_name = f"{RROBIN_TABLE_PREFIX}{i}"
-        cur.execute(f"DROP TABLE IF EXISTS {table_name};")
+    # # Xóa các bảng phân mảnh cũ
+    # for i in range(numberofpartitions):
+    #     table_name = f"{RROBIN_TABLE_PREFIX}{i}"
+    #     cur.execute(f"DROP TABLE IF EXISTS {table_name};")
     
     # Tạo bảng và chèn dữ liệu
     for i in range(numberofpartitions):

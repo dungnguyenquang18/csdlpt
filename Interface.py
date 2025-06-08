@@ -4,6 +4,7 @@
 #
 
 import psycopg2
+import time
 
 DATABASE_NAME = 'dds_assgn1'
 
@@ -13,6 +14,7 @@ def getopenconnection(user='postgres', password='vinh1950', dbname='csdlpt'):
 
 
 def loadratings(ratingstablename, ratingsfilepath, openconnection):
+    start = time.time()
     con = openconnection
     cur = con.cursor()
     
@@ -45,8 +47,10 @@ def loadratings(ratingstablename, ratingsfilepath, openconnection):
     
     cur.close()
     con.commit()
+    print(f"[loadratings] Thời gian xử lý: {time.time() - start:.4f} giây")
 
 def rangepartition(ratingstablename, numberofpartitions, openconnection):
+    start = time.time()
     if numberofpartitions < 1:
         raise ValueError("Number of partitions must be at least 1")
     
@@ -73,8 +77,10 @@ def rangepartition(ratingstablename, numberofpartitions, openconnection):
     
     cur.close()
     con.commit()
+    print(f"[rangepartition] Thời gian xử lý: {time.time() - start:.4f} giây")
 
 def roundrobinpartition(ratingstablename, numberofpartitions, openconnection):
+    start = time.time()
     if numberofpartitions < 1:
         raise ValueError("Number of partitions must be at least 1")
     
@@ -98,7 +104,10 @@ def roundrobinpartition(ratingstablename, numberofpartitions, openconnection):
     
     cur.close()
     con.commit()
+    print(f"[roundrobinpartition] Thời gian xử lý: {time.time() - start:.4f} giây")
+
 def roundrobininsert(ratingstablename, userid, itemid, rating, openconnection):
+    start = time.time()
     if not (0 <= rating <= 5):
         raise ValueError("Rating must be between 0 and 5")
     
@@ -123,8 +132,10 @@ def roundrobininsert(ratingstablename, userid, itemid, rating, openconnection):
     
     cur.close()
     con.commit()
+    print(f"[roundrobininsert] Thời gian xử lý: {time.time() - start:.6f} giây")
 
 def rangeinsert(ratingstablename, userid, itemid, rating, openconnection):
+    start = time.time()
     if not (0 <= rating <= 5):
         raise ValueError("Rating must be between 0 and 5")
     
@@ -160,6 +171,7 @@ def rangeinsert(ratingstablename, userid, itemid, rating, openconnection):
     
     cur.close()
     con.commit()
+    print(f"[rangeinsert] Thời gian xử lý: {time.time() - start:.6f} giây")
 
 def create_db(dbname):
     try:

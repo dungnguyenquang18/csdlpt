@@ -1,0 +1,601 @@
+\documentclass[a4paper]{article}
+
+% --- HỖ TRỢ TIẾNG VIỆT ---
+\usepackage[utf8]{inputenc}      % đầu vào Unicode
+\usepackage[T5]{fontenc}         % font T5 cho tiếng Việt
+\usepackage[vietnamese]{babel}   % tiếng Việt
+
+% --- CĂN LỀ & ĐỊNH DẠNG ---
+\usepackage[left=2.5cm,right=2cm,top=2cm,bottom=2cm]{geometry} 
+\setlength{\parindent}{0pt}
+
+% --- VẼ HÌNH, ĐỒ HỌA ---
+\usepackage{graphicx} 
+\usepackage{tikz} 
+\usepackage{float}
+
+
+% --- KÝ HIỆU & MATH ---
+\usepackage{array}
+\usepackage{mathabx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\newtheorem{definition}{Định nghĩa}
+\usepackage{changepage} % Cho phép điều chỉnh lề
+
+% --- TRANG TRÍ ---
+\usepackage{wallpaper}
+\usepackage{dashrule}
+\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+
+% --- DANH SÁCH, LIÊN KẾT ---
+\usepackage{enumitem} 
+\usepackage{hyperref}
+
+% --- MÃ NGUỒN ---
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{gray!10},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  captionpos=b,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  columns=fullflexible,
+  keepspaces=true
+}
+
+% --- KHÁC ---
+\usepackage{caption}
+\usepackage{scrextend}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+
+% --- FONT CỠ ---
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+
+% Nếu cần chỉnh cỡ chữ chung:
+\usepackage{anyfontsize}
+\fontsize{16pt}{15.6pt}\selectfont
+\linespread{1.2}
+
+
+
+
+
+\lstset{
+    language=[x86masm]Assembler,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    frame=single,
+    tabsize=4,
+    showspaces=false,
+    showstringspaces=false
+}
+
+\begin{document}
+	\newpage
+	\begin{titlepage}
+		\begin{tikzpicture}[remember picture,overlay,inner sep=0,outer sep=0]
+			 \draw[blue!70!black,line width=4pt] 
+			 ([xshift=1cm,yshift=1.5cm]current page.south west) coordinate (A)
+			 -- ([xshift=-1cm,yshift=1.5cm]current page.south east) coordinate (B)
+			 -- ([xshift=-1cm,yshift=-1.5cm]current page.north east) coordinate (C)
+			 -- ([xshift=1cm,yshift=-1.5cm]current page.north west) coordinate (D)
+			 -- cycle;
+			 
+			 % Viền gấp khúc trong
+			 \draw ([yshift=0.5cm,xshift=-0.5cm]C)-- ([yshift=0.5cm,xshift=0.5cm]D)--
+			 ([yshift=-0.5cm,xshift=0.5cm]D) --([yshift=-0.5cm,xshift=-0.5cm]D)
+			 --([yshift=0.5cm,xshift=-0.5cm]A)--([yshift=0.5cm,xshift=0.5cm]A)
+			 --([yshift=-0.5cm,xshift=0.5cm]A)-- ([yshift=-0.5cm,xshift=-0.5cm]B)
+			 --([yshift=0.5cm,xshift=-0.5cm]B)--([yshift=0.5cm,xshift=0.5cm]B)
+			 --([yshift=-0.5cm,xshift=0.5cm]C)--([yshift=-0.5cm,xshift=-0.5cm]C)
+			 --([yshift=0.5cm,xshift=-0.5cm]C);
+			 
+			 \draw ([yshift=-0.3cm,xshift=0.3cm]C)-- ([yshift=-0.3cm,xshift=-0.3cm]D)--
+			 ([yshift=0.3cm,xshift=-0.3cm]D) --([yshift=0.3cm,xshift=0.3cm]D)
+			 --([yshift=-0.3cm,xshift=0.3cm]A)--([yshift=-0.3cm,xshift=-0.3cm]A)
+			 --([yshift=0.3cm,xshift=-0.3cm]A)-- ([yshift=0.3cm,xshift=0.3cm]B)
+			 --([yshift=-0.3cm,xshift=0.3cm]B)--([yshift=-0.3cm,xshift=-0.3cm]B)
+			 --([yshift=0.3cm,xshift=-0.3cm]C)--([yshift=0.3cm,xshift=0.3cm]C)
+			 --([yshift=-0.3cm,xshift=0.3cm]C);
+			
+		\end{tikzpicture}
+		\begin{center}
+			\vspace{2pt}
+			
+			\textbf{HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG}
+			
+			\vspace{7pt}
+			\textbf{KHOA CÔNG NGHỆ THÔNG TIN 1}
+			
+			\vspace{4pt}
+			\hdashrule[0.5ex]{6cm}{1pt}{2mm 0.5mm}
+		\end{center}
+		
+		\vspace{10pt}
+		\begin{center}
+			\includegraphics[scale=0.7]{ptit.png}
+			
+			\vspace{10pt}
+			\fontsize{18pt}{17pt}\selectfont 
+			\textbf{BÀI CÁO KẾT THÚC HỌC PHẦN} 
+			
+			\vspace{7pt}
+			\textbf{MÔN CƠ SỞ DỮ LIỆU PHÂN TÁN}
+		\end{center}
+		
+
+		
+		\vspace{6pt}
+
+		\begin{adjustwidth}{1.5cm}{0cm}
+    \begin{tabbing}
+        \fontsize{16pt}{20pt}\selectfont
+        \hspace{6cm} \= \hspace{5cm} \= \kill
+        \textbf{Giảng viên hướng dẫn:} \> \textbf{TS. KIM NGỌC BÁCH} \>\\ [6pt]
+        \textbf{Nhóm học phần:} \> \textbf{09} \>\\ [6pt]
+        \textbf{Nhóm bài tập lớn:} \> \textbf{05} \>\\ [6pt]
+        \textbf{Sinh viên:} \> \textbf{NGUYỄN QUANG DŨNG B22DCCN133} \>\\ [6pt]
+                            \> \textbf{NGUYỄN TUẤN NAM B22DCCN561} \>\\ [6pt]
+                            \> \textbf{LÊ ĐĂNG NINH B22DCCN572} \>\\ [6pt]
+    \end{tabbing}
+\end{adjustwidth}
+
+		
+		
+		\vspace{14pt}
+		\begin{center}
+			\textbf{Hà Nội, 2025}
+		\end{center}
+	\end{titlepage}
+	
+
+\clearpage
+% Mục lục
+\tableofcontents
+
+\clearpage
+
+% Danh mục hình vẽ
+
+\renewcommand{\listfigurename}{Danh mục hình ảnh}
+\listoffigures
+\addcontentsline{toc}{section}{Danh mục hình ảnh}
+
+
+
+\renewcommand{\listtablename}{Danh mục bảng biểu}
+\listoftables
+\addcontentsline{toc}{section}{Danh mục bảng biểu}
+\newpage
+
+\section{Phân tích yêu cầu đề bài}
+\subsection{Nhiệm vụ yêu cầu}
+Mô phỏng các phương pháp phân mảnh dữ liệu trên một hệ quản trị cơ sở dữ liệu quan hệ mã nguồn mở (ví dụ: PostgreSQL hoặc MySQL).\\
+Mỗi nhóm sinh viên phải tạo một tập các hàm Python để tải dữ liệu đầu vào vào một bảng quan hệ, phân mảnh bảng này bằng các phương pháp phân mảnh ngang khác nhau, và chèn các bộ dữ liệu mới vào đúng phân mảnh.
+\subsection{Mục tiêu bài tập}
+Mô phỏng quá trình phân mảnh ngang dữ liệu trên một bảng quan hệ sử dụng dữ liệu thực tế (Tập tin ratings.dat của MovieLens 10M),	sử dụng cơ sở dữ liệu là PostgreSQL hoặc MySQL và ngôn ngữ lập trình là python. Áp dụng hai phương thức phân mảnh là Range Partitioning và Round-Robin Partitioning. Bao gồm các thao tác yêu cầu đó là Load dữ liệu vào một bảng gốc tên ratings, phân mảnh bảng này theo Range và Round-Robin và chèn dữ liệu mới và tự động đưa vào đúng phân mảnh tương ứng.
+
+\subsection{Công nghệ sử dụng}
+\begin{itemize}
+    \item Hệ điều hành: Ubuntu 22.04 / Windows 10
+    \item Ngôn ngữ lập trình: Python 3.12.x
+    \item Hệ quản trị SQL: PostgreSQL
+    \item Thư viện Python: psycopg2
+    \item IDE: VSCode / PyCharm
+\end{itemize}
+
+\subsection{Dữ liệu đầu vào}
+dữ liệu đầu vào là tệp ratings.dat chứa 10 triệu đánh giá và 100.000 thẻ được áp dụng cho 10.000 bộ phim bởi 72.000 người dùng. Mỗi dòng trong tệp đại diện cho một đánh giá của một người dùng với một 
+bộ phim, và có định dạng như sau: UserID::MovieID::Rating::Timestamp
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{data.png}
+    \caption{Dữ liệu đầu vào}
+
+\end{figure}
+
+\clearpage
+\section{Phân tích và thiết kế giải pháp}
+Định dạng mỗi dòng: UserID::MovieID::Rating::Timestamp
+Dữ liệu cần sử dụng: UserID, MovieID, Rating
+
+
+\subsection{Phân tích và thiết kế các hàm chính}
+\subsubsection{Hàm loadrating}
+
+\textit{Phân tích:}  
+Hàm này chịu trách nhiệm đọc dữ liệu từ file (dạng ratings.dat) và nạp vào bảng gốc \texttt{ratings} trong cơ sở dữ liệu. Dữ liệu đầu vào thường có định dạng: \texttt{UserID:MovieID:Rating:Timestamp}.\\
+
+\textit{Đầu vào:}
+\begin{itemize}
+    \item \texttt{ratingstablename}: Tên bảng sẽ lưu dữ liệu (thường là \texttt{ratings}).
+    \item \texttt{ratingsfilepath}: Đường dẫn tới file dữ liệu.
+    \item \texttt{openconnection}: Kết nối tới cơ sở dữ liệu.\\
+\end{itemize}
+
+\textit{Đầu ra:}  
+Không trả về giá trị, nhưng tạo bảng và nạp dữ liệu thành công vào CSDL.\\
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Nếu bảng đã tồn tại thì xóa đi để tránh trùng lặp.
+    \item Tạo bảng mới với các trường: \texttt{userid}, \texttt{movieid}, \texttt{rating}.
+    \item Đọc file, xử lý dữ liệu và nạp vào bảng bằng lệnh \texttt{COPY} hoặc \texttt{INSERT}.
+    \item Đảm bảo dữ liệu đúng định dạng, loại bỏ các trường không cần thiết.
+\end{itemize}
+
+\subsubsection{Hàm rangepartition}
+
+\textit{Phân tích:}  
+Chia bảng \texttt{ratings} thành nhiều bảng con theo từng khoảng giá trị của trường \texttt{rating} (ví dụ: 0-1, 1-2,...).\\
+
+\textit{Đầu vào:}
+\begin{itemize}
+    \item \texttt{ratingstablename}: Tên bảng gốc.
+    \item \texttt{numberofpartitions}: Số lượng phân mảnh (partition).
+    \item \texttt{openconnection}: Kết nối tới CSDL.\\
+\end{itemize}
+
+\textit{Đầu ra:}  
+Tạo ra các bảng con \texttt{range\_part0}, \texttt{range\_part1}, ..., mỗi bảng chứa các dòng thuộc một khoảng rating nhất định.\\
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Tính toán khoảng giá trị cho mỗi partition.
+    \item Tạo các bảng con tương ứng.
+    \item Dùng truy vấn \texttt{INSERT INTO ... SELECT ... WHERE ...} để phân phối dữ liệu vào từng bảng con.
+\end{itemize}
+
+
+\subsubsection{Hàm roundrobinpartition}
+
+\textit{Phân tích:}  
+Chia bảng \texttt{ratings} thành nhiều bảng con theo phương pháp luân phiên từng dòng (dòng 1 vào bảng 0, dòng 2 vào bảng 1,...).\\
+
+\textit{Đầu vào:}
+\begin{itemize}
+    \item \texttt{ratingstablename}: Tên bảng gốc.
+    \item \texttt{numberofpartitions}: Số lượng phân mảnh.
+    \item \texttt{openconnection}: Kết nối tới CSDL.\\
+\end{itemize}
+
+\textit{Đầu ra:}  
+Tạo ra các bảng con \texttt{rrobin\_part0}, \texttt{rrobin\_part1}, ..., mỗi bảng chứa các dòng theo thứ tự luân phiên.\\
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Đánh số thứ tự các dòng trong bảng gốc.
+    \item Chia đều các dòng vào các bảng con dựa trên chỉ số dòng và số partition.
+    \item Đảm bảo mỗi bảng con nhận đúng các dòng theo quy tắc round-robin.
+\end{itemize}
+
+\subsubsection{Hàm rangeinsert}
+
+
+\textit{Phân tích:}  
+Chèn một bản ghi mới vào bảng gốc và vào đúng bảng con range partition phù hợp với giá trị rating.\\
+
+\textit{Đầu vào:}
+\begin{itemize}
+    \item \texttt{ratingstablename}: Tên bảng gốc.
+    \item \texttt{userid}, \texttt{itemid}, \texttt{rating}: Thông tin bản ghi mới.
+    \item \texttt{openconnection}: Kết nối tới CSDL.\\
+\end{itemize}
+
+\textit{Đầu ra:}  
+Bản ghi mới được thêm vào bảng gốc và đúng bảng con range partition.\\
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Chèn bản ghi vào bảng gốc.
+    \item Xác định partition phù hợp dựa trên giá trị rating.
+    \item Chèn bản ghi vào bảng con tương ứng.
+\end{itemize}
+
+
+\subsubsection{Hàm roundrobininsert}
+
+\textit{Phân tích:}  
+Chèn một bản ghi mới vào bảng gốc và vào bảng con round-robin tiếp theo.\\
+
+\textit{Đầu vào:}
+\begin{itemize}
+    \item \texttt{ratingstablename}: Tên bảng gốc.
+    \item \texttt{userid}, \texttt{itemid}, \texttt{rating}: Thông tin bản ghi mới.
+    \item \texttt{openconnection}: Kết nối tới CSDL.\\
+\end{itemize}
+
+\textit{Đầu ra:}  
+Bản ghi mới được thêm vào bảng gốc và đúng bảng con round-robin.\\
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Chèn bản ghi vào bảng gốc.
+    \item Xác định bảng con round-robin tiếp theo dựa trên tổng số bản ghi đã có.
+    \item Chèn bản ghi vào bảng con tương ứng.
+\end{itemize}
+
+\subsection{Thiết kế giải pháp cho từng hàm chính}
+
+\subsubsection{Hàm \texttt{loadratings}}
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Đầu vào: tên bảng, đường dẫn file dữ liệu, kết nối CSDL.
+    \item Đầu ra: bảng dữ liệu \texttt{ratings} đã được nạp đầy đủ.
+    \item Hàm sử dụng lệnh \texttt{COPY} của PostgreSQL để nạp dữ liệu từ file vào bảng tạm, sau đó chuyển dữ liệu sang bảng chính. Việc dùng \texttt{COPY} giúp tốc độ nạp dữ liệu nhanh hơn rất nhiều so với việc đọc từng dòng và \texttt{INSERT} từng bản ghi, vì \texttt{COPY} tối ưu thao tác I/O và giảm số lần round-trip giữa Python và PostgreSQL.
+    \item Sau khi nạp xong, bảng tạm được xóa để giải phóng bộ nhớ.
+\end{itemize}
+\textit{Phân tích hiệu năng:}  
+Việc sử dụng \texttt{COPY} và thao tác bulk-insert giúp giảm thời gian xử lý đáng kể, đặc biệt với file dữ liệu lớn (hàng trăm nghìn dòng).
+
+\subsubsection{Hàm \texttt{rangepartition}}
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Đầu vào: tên bảng gốc, số lượng phân mảnh, kết nối CSDL.
+    \item Đầu ra: các bảng con \texttt{range\_part0}, \texttt{range\_part1}, ...
+    \item Hàm tính toán khoảng giá trị rating cho từng partition, tạo bảng con tương ứng, sau đó dùng một câu lệnh \texttt{INSERT INTO ... SELECT ... WHERE ...} để chuyển dữ liệu vào từng bảng con.
+    \item Đối với partition đầu tiên, điều kiện là \texttt{rating >= min\_range}, các partition sau là \texttt{rating > min\_range}. Điều này đảm bảo không bị trùng lặp hoặc bỏ sót giá trị biên.
+\end{itemize}
+\textit{Phân tích hiệu năng:}  
+Việc dùng truy vấn SQL dạng \texttt{INSERT INTO ... SELECT ... WHERE ...} giúp PostgreSQL xử lý dữ liệu trực tiếp trên server, không cần chuyển dữ liệu về phía client, do đó tốc độ phân mảnh rất nhanh và tận dụng tối đa khả năng tối ưu hóa truy vấn của hệ quản trị CSDL.
+
+
+\subsubsection{Hàm \texttt{roundrobinpartition}}
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Đầu vào: tên bảng gốc, số lượng phân mảnh, kết nối CSDL.
+    \item Đầu ra: các bảng con \texttt{rrobin\_part0}, \texttt{rrobin\_part1}, ...
+    \item Hàm sử dụng hàm cửa sổ \texttt{ROW\_NUMBER()} của SQL để đánh số thứ tự từng dòng, sau đó chia đều các dòng vào các bảng con dựa trên phép chia lấy dư (\texttt{rnum \% numberofpartitions}).
+    \item Mỗi partition được tạo và nạp dữ liệu chỉ với một truy vấn SQL duy nhất.
+\end{itemize}
+\textit{Phân tích hiệu năng:}  
+Việc tận dụng \texttt{ROW\_NUMBER()} và thực hiện phân phối dữ liệu hoàn toàn trên phía server giúp giảm thiểu thời gian xử lý, không cần lặp qua từng dòng ở phía Python, do đó tốc độ phân mảnh round-robin rất nhanh và ổn định, kể cả với dữ liệu lớn.
+
+\subsubsection{Hàm \texttt{rangeinsert}}
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Đầu vào: tên bảng gốc, thông tin bản ghi mới (userid, itemid, rating), kết nối CSDL.
+    \item Đầu ra: bản ghi mới được thêm vào bảng gốc và đúng bảng con range partition.
+    \item Hàm xác định partition phù hợp dựa trên giá trị rating và số lượng partition hiện có (tính toán bằng công thức giống hàm \texttt{rangepartition}), sau đó chèn bản ghi vào cả bảng gốc và bảng con tương ứng.
+\end{itemize}
+\textit{Phân tích hiệu năng:}  
+Việc xác định partition bằng phép toán số học và chỉ thực hiện hai lệnh \texttt{INSERT} giúp thao tác chèn rất nhanh, không cần quét lại toàn bộ bảng dữ liệu.
+
+\subsubsection{Hàm \texttt{roundrobininsert}}
+
+\textit{Thiết kế:}
+\begin{itemize}
+    \item Đầu vào: tên bảng gốc, thông tin bản ghi mới (userid, itemid, rating), kết nối CSDL.
+    \item Đầu ra: bản ghi mới được thêm vào bảng gốc và đúng bảng con round-robin.
+    \item Hàm xác định partition tiếp theo dựa trên tổng số bản ghi hiện có trong bảng gốc (dùng \texttt{COUNT(*)}), sau đó chèn bản ghi vào bảng con tương ứng theo quy tắc round-robin.
+\end{itemize}
+\textit{Phân tích hiệu năng:}  
+Việc xác định bảng con chỉ cần một phép chia lấy dư, thao tác chèn chỉ thực hiện hai lệnh \texttt{INSERT}, do đó tốc độ xử lý rất nhanh và không bị ảnh hưởng bởi kích thước dữ liệu.
+\newpage
+
+\section{Cài đặt và kiểm thử chương trình}
+\subsection{Cài đặt chương trình}
+\subsubsection{Hàm \texttt{loadratings}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{1.png}
+    \caption{Hàm \texttt{loadratings}}
+
+\end{figure}
+Cụ thể chi tiết xử lý:
+\begin{itemize}
+    \item Kiểm tra xem bảng đã tồn tại chưa nếu có thì xóa
+    \item Tạo bảng chính ratings với schema đúng
+    \item Tạo bảng tạm ratings\_temp để parse dữ liệu theo định dạng đặc biệt với dấu ‘:’
+    \item Dùng copy\_from để nạp dữ liệu nhanh từ dữ liệu sang bảng tạm
+    \item Chuyển dữ liệu từ bảng tạm sang bảng chính trên những trường mà bảng chính cần
+    \item Xóa bảng tạm
+\end{itemize}
+
+\subsubsection{Hàm \texttt{rangepartition}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{2.png}
+    \caption{Hàm \texttt{rangepartition}}
+    
+\end{figure}
+
+Cụ thể chi tiết xử lý:
+\begin{itemize}
+    \item Xác định độ rộng mỗi khoảng: delta = 5 / N
+    \item Với mỗi phân mảnh i, tạo bảng range\_part\{i\} và lấy dữ liệu từ bảng gốc:
+    \begin{itemize}
+        \item Nếu i = 0: lấy rating >= min AND <= max
+        \item Nếu i > 0: lấy rating > min AND <= max
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Hàm \texttt{roundrobinpartition}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{3.png}
+    \caption{Hàm \texttt{roundrobinpartition}}
+
+\end{figure}
+
+Cụ thể chi tiết xử lý:
+\begin{itemize}
+    \item Dùng hàm ROW\_NUMBER() để gán số thứ tự mỗi dòng
+    \item Chia đều theo số phân mảnh bằng phép chia dư % N
+    \item Mỗi bảng rrobin\_part\{i\} nhận các dòng row\_number % N == i
+\end{itemize}
+
+\subsubsection{Hàm \texttt{rangeinsert}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{5.png}
+    \caption{Hàm \texttt{rangeinsert}}
+
+\end{figure}
+
+Cụ thể chi tiết xử lý:
+\begin{itemize}
+    \item Tính index của phân mảnh bằng cách xác định đoạn [min, max] chứa rating
+    \item Chèn bản ghi vào bảng gốc và bảng phân mảnh tương ứng
+\end{itemize}
+
+\subsubsection{Hàm \texttt{roundrobininsert}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{4.png}
+    \caption{Hàm \texttt{roundrobininsert}}
+
+\end{figure}
+
+Cụ thể chi tiết xử lý:
+\begin{itemize}
+    \item Lấy tổng số dòng trong bảng gốc -> total\_rows
+    \item Tính index = (total\_rows – 1) % N
+    \item Chèn vào bảng gốc và bảng rrobin\_part\{index\}
+\end{itemize}
+
+\subsection{Kiểm thử chương trình}
+\subsubsection{Kiểm thử trên tập test\_data.dat}
+\textbf{Đặc điểm của tập dữ liệu:} có 20 dòng\\
+\textbf{Cấu hình test case:}
+\begin{itemize}
+    \item Hàm \texttt{loadratings}: kiểm tra xem khi nạp vào có đủ 20 dòng không
+    \item Hàm \texttt{rangepartition}: với đầu vào số phân mảnh là 5, kiểm tra sau khi thực hiện hàm thì có đủ 5 bảng thỏa mãn có dạng 'range\_part\%' không
+    \item Hàm \texttt{roundrobinpartition}: với đầu vào số phân mảnh là 5, kiểm tra sau khi thực hiện hàm thì có đủ 5 bảng thỏa mãn có dạng 'rrobin\_part\%' không
+    \item Hàm \texttt{rangeinsert}: với đầu vào là (userid, movieid, rating) = (100, 2, 3) thì nó có ở phân mảnh số 3 tức bảng range\_part2 không
+    \item Hàm \texttt{roundrobininsert}: với đầu vào là (userid, movieid, rating) = (100, 1, 3) thì nó có ở phân mảnh số 1 tức bảng range\_part0 không
+\end{itemize}
+\textbf{Khi chạy chương trình ta thu được kết quả tất cả các test case đều pass như hình dưới:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{test.png}
+    \caption{Kiểm thử trên tập test\_data.dat bằng code nhóm thực hiện}
+
+\end{figure}
+\subsubsection{Kiểm thử trên tập ratings.dat}
+
+\textbf{Đặc điểm của tập dữ liệu:} có 10000054 dòng\\
+\textbf{Cấu hình test case:}
+\begin{itemize}
+    \item Hàm \texttt{loadratings}: kiểm tra xem khi nạp vào có đủ 10000054 dòng không
+    \item Hàm \texttt{rangepartition}: với đầu vào số phân mảnh là 5, kiểm tra sau khi thực hiện hàm thì có đủ 5 bảng thỏa mãn có dạng 'range\_part\%' không
+    \item Hàm \texttt{roundrobinpartition}: với đầu vào số phân mảnh là 5, kiểm tra sau khi thực hiện hàm thì có đủ 5 bảng thỏa mãn có dạng 'rrobin\_part\%' không
+    \item Hàm \texttt{rangeinsert}: với đầu vào là (userid, movieid, rating) = (100, 2, 3) thì nó có ở phân mảnh số 3 tức bảng range\_part2 không
+    \item Hàm \texttt{roundrobininsert}: với đầu vào là (userid, movieid, rating) = (100, 1, 3) thì nó có ở phân mảnh số 5 tức bảng range\_part4 không
+\end{itemize}
+\textbf{Khi chạy chương trình ta thu được kết quả tất cả các test case đều pass như hình dưới:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{real.png}
+    \caption{Kiểm thử trên tập test\_data.dat bằng code nhóm thực hiện}
+    
+
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{realthay.png}
+    \caption{Kiểm thử trên tập test\_data.dat bằng code mẫu của thầy đã thêm tính thời gian}
+    
+
+\end{figure}
+\textbf{So sánh hiệu năng giữa code của nhóm và code mẫu của thầy dựa trên thời gian thực hiện(s)}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Hàm} & \textbf{Hiệu năng trên code của nhóm (s)} & \textbf{Hiệu năng trên code mẫu của thầy (s)} \\
+        \hline
+        \texttt{loadratings} lần 1 & 20.9004 & 27.8677 \\
+        \hline
+        \texttt{rangepartition} & 20.9893 & 20.4091 \\
+        \hline
+        \texttt{rangeinsert} & 0.008063 & 0.003 \\
+        \hline
+        \texttt{loadratings} lần 2 & 22.8225 & 32.1877 \\
+        \hline
+        \texttt{roundrobinpartition} & 32.2945 & 33.5454 \\
+        \hline
+        \texttt{roundrobininsert} & 0.285790 & 0.242677 \\
+        \hline
+    \end{tabular}
+    \caption{So sánh hiệu năng giữa code của nhóm và code mẫu của thầy}
+\end{table}
+
+Từ bảng so sánh hiệu năng giữa code của nhóm và code mẫu của thầy, có thể thấy rằng thời gian thực thi của hai giải pháp là khá tương đương ở hầu hết các hàm. Đặc biệt, ở các hàm xử lý dữ liệu lớn như \texttt{loadratings}, \texttt{rangepartition} và \texttt{roundrobinpartition}, code của nhóm có tốc độ xử lý nhanh hơn hoặc tương đương so với code mẫu. Điều này cho thấy nhóm đã tận dụng tốt các kỹ thuật tối ưu như sử dụng lệnh \texttt{COPY} để nạp dữ liệu hàng loạt và các truy vấn SQL tổng hợp để phân mảnh dữ liệu trực tiếp trên server, giảm thiểu thao tác lặp ở phía Python.\\
+
+Ở các hàm chèn bản ghi đơn lẻ như \texttt{rangeinsert} và \texttt{roundrobininsert}, thời gian thực thi của code nhóm và code mẫu đều rất nhỏ, sự chênh lệch không đáng kể và chủ yếu phụ thuộc vào tốc độ truy vấn của hệ quản trị cơ sở dữ liệu tại thời điểm kiểm thử.\\
+
+Nhìn chung, giải pháp của nhóm đảm bảo hiệu năng tốt, tận dụng tối đa sức mạnh của PostgreSQL, đồng thời vẫn đảm bảo tính đúng đắn và dễ mở rộng cho các bài toán lớn hơn trong thực tế.\\
+
+
+\clearpage
+\section{Kết luận và hướng phát triển}
+\textbf{Ưu điểm:}
+\begin{itemize}
+    \item Đáp ứng đầy đủ yêu cầu đề bài
+    \item Dữ liệu được xử lý chính xác, kiểm thử pass toàn bộ
+    \item Tốc độ xử lý truy vấn nhanh
+    \item Sử dụng PostgreSQL hiệu quả qua COPY và ROW\_NUMBER()
+\end{itemize}
+\textbf{Hạn chế:}
+\begin{itemize}
+    \item Không có xử lý rollback nếu chèn lỗi
+    \item Không lưu trạng thái lần chèn cuối cùng trong Round Robin
+
+\end{itemize}
+\textbf{Đề xuất phát triển}
+\begin{itemize}
+    \item Thêm bảng metadata để quản lý trạng thái chèn round robin chính xác hơn
+    \item Giao diện web để xem nội dung phân mảnh
+    \item Hỗ trợ phân mảnh dọc và kết hợp
+\end{itemize}
+\clearpage
+\section{Phân chia công việc}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|p{8cm}|}
+        \hline
+        \textbf{Thành viên} & \textbf{Công việc thực hiện} \\
+        \hline
+        Nguyễn Quang Dũng & 
+        - Thiết kế và cài đặt hàm  \\
+        & - Viết tài liệu hướng dẫn sử dụng chương trình \\
+        & - Feedback báo cáo\\
+        \hline
+        Nguyễn Tuấn Nam & 
+         - Kiểm thử chương trình\\&
+         - Feedback báo cáo \\
+        \hline
+        Lê Đăng Ninh & 
+       
+        - Tổng hợp và viết báo cáo\\
+        \hline
+    \end{tabular}
+    \caption{Bảng phân chia công việc giữa các thành viên}
+\end{table}
+\end{document}
